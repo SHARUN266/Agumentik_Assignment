@@ -1,0 +1,15 @@
+my-react-project/
+├── node_modules/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── Header.js
+│   │   ├── MainContent.js
+│   │   ├── Footer.js
+│   │   └── FormPopup.js
+│   ├── App.js
+│   └── index.js
+├── package.json
+├── package-lock.json
+└── db.json (for JSON Server)
