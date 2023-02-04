@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import bgImage from "../assets/planets.png";
 
@@ -13,18 +13,19 @@ export default function LandingPage() {
           Are you a tech trainer, influencer or expert?
         </Text>
       </Box>
+
       <Box
         h={"100vh"}
         w={["auto", "80%"]}
         bgRepeat={"no-repeat"}
         objectFit={"cover"}
         m={"auto"}
-        mt={["-85%", "-55%", "-15%"]}
+        mt={["-85%", "-35%", "-15%"]}
         textAlign={"center"}
         bgSize={"contain"}
         bgPos={"center"}
         bgImage={`url(${bgImage})`}
-      ></Box>
+      />
     </Box>
   );
 }

@@ -1,24 +1,17 @@
-import { ReactNode } from "react";
 import {
   Box,
   Flex,
-  Avatar,
   HStack,
   Text,
   Link,
   IconButton,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
   useDisclosure,
-  useColorModeValue,
   Stack,
   Heading,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon, AddIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { useState } from "react";
 
 const Links = ["Home", "How it works", "Features", "Contact Us"];
 
@@ -31,28 +24,50 @@ const NavLink = ({ children }) => (
     transition={"500ms"}
     _hover={{
       color: "blueColorCode",
-    
     }}
     href={"#"}
   >
     {children}
   </Link>
 );
+const style = {
+  backgroundColor: "#ffffff11",
+
+  backdropFilter: "blur(20px)",
+  webkitBackdropFilter: "blur(50px)",
+  boxShadow: "0px 0px 15px 5px rgba(0, 0, 0, 0.2)",
+};
 
 export default function Navbar() {
+  const [flag, setFlag] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  window.addEventListener("scroll", () => {
+    let y = window.scrollY;
+    if (y > 150) {
+      setFlag(true);
+    }
+    if (y < 50) {
+      setFlag(false);
+    }
+  });
 
   return (
-    <>
+    <Box
+      style={flag ? style : { bg: "#111" }}
+      transition={"1000ms"}
+      pos={"sticky"}
+      top={"0"}
+    >
       <Box
         w={["95%", "100%", "80%"]}
-        h={["10vh", "15vh", "20vh"]}
+        h={["5vh", "10vh", "15vh"]}
         m="auto"
         px={4}
       >
         <Flex h={"100%"} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             size={"md"}
+            colorScheme={"transparent"}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={"Open Menu"}
             display={{ md: "none" }}
@@ -70,16 +85,16 @@ export default function Navbar() {
               <NavLink key={link}>{link}</NavLink>
             ))}
           </HStack>
-          <Flex  alignItems={"center"}>
+          <Flex alignItems={"center"}>
             <Button
               color={"fontColor"}
               bgColor={"blueColorCode"}
               _hover={{
-                bg:'blueColorCode'
+                bg: "blueColorCode",
               }}
-              size={["sm","md","lg"]}
+              size={["sm", "md", "lg"]}
               borderRadius={"50px"}
-              shadow={'md'}
+              shadow={"md"}
             >
               Read more
             </Button>
@@ -96,6 +111,6 @@ export default function Navbar() {
           </Box>
         ) : null}
       </Box>
-    </>
+    </Box>
   );
 }
