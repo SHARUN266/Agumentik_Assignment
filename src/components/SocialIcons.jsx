@@ -10,6 +10,7 @@ const socialIcons = [
 export default function SocialIcons() {
   return (
     <Stack
+    display={{base:"none",md:"none",lg:"flex"}}
       h="auto"
       p="16px"
       w="5%"

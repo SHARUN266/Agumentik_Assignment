@@ -3,7 +3,7 @@ import {
   Flex,
   HStack,
   Text,
-  Link,
+  
   IconButton,
   Button,
   useDisclosure,
@@ -12,22 +12,26 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Links = ["Home", "How it works", "Features", "Contact Us"];
 
 const NavLink = ({ children }) => (
   <Link
-    px={2}
+   
+   to={"/about"}
+  >
+    <Text px={2}
     py={1}
     fontSize={18}
     fontWeight={400}
     transition={"500ms"}
     _hover={{
       color: "blueColorCode",
-    }}
-    href={"#"}
-  >
-    {children}
+    }}>
+  {children}
+    </Text>
+  
   </Link>
 );
 const style = {
@@ -53,6 +57,7 @@ export default function Navbar() {
 
   return (
     <Box
+    zIndex={100}
       style={flag ? style : { bg: "#111" }}
       transition={"1000ms"}
       pos={"sticky"}
@@ -74,11 +79,14 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
+            <Link to="/">
             <Flex alignItems={"center"}>
               {" "}
               <Heading fontSize={25}>Galactic</Heading>{" "}
               <Text fontSize={25}>Jobs</Text>{" "}
             </Flex>
+            </Link>
+            
           </HStack>
           <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
             {Links.map((link) => (
@@ -96,7 +104,7 @@ export default function Navbar() {
               borderRadius={"50px"}
               shadow={"md"}
             >
-              Read more
+            Login
             </Button>
           </Flex>
         </Flex>

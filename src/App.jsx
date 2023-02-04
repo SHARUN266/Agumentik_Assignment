@@ -1,19 +1,22 @@
 import { Box } from "@chakra-ui/react";
 import { useState } from "react";
 import Home from "./pages/Home";
-import { loadFull } from "tsparticles";
-import Particles from "react-tsparticles";
-import { particlesOptions } from "./config/TsConfig";
+
 import SocialIcons from "./components/SocialIcons";
+import Navbar from "./components/Navbar";
+import { Routes,Route } from "react-router-dom";
+import About from "./pages/About";
 function App() {
-  const particlesInit = (engine) => {
-    loadFull(engine);
-  };
+ 
 
   return (
     <Box bg={"#000"} color={"white"}>
-      <Particles init={particlesInit} options={particlesOptions} />
-      <Home />
+     <Navbar/>
+     <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About/>}/>
+     </Routes>
+      
       <SocialIcons/>
     </Box>
   );
