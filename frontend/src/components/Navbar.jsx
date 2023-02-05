@@ -104,7 +104,7 @@ export default function Navbar() {
               borderRadius={"50px"}
               shadow={"md"}
             >
-            Login
+            Admin Login
             </Button>
           </Flex>
         </Flex>
