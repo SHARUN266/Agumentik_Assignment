@@ -1,16 +1,40 @@
-import { Box, IconButton, Stack } from "@chakra-ui/react";
-import React from "react";
-import { BsFacebook, BsTwitter } from "react-icons/bs";
+import {  IconButton,  Stack } from "@chakra-ui/react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { BsFacebook, BsLinkedin } from "react-icons/bs";
 import { GrInstagram } from "react-icons/gr";
-const socialIcons = [
-  <BsFacebook color="#3b5998" size={"2rem"} />,
-  <GrInstagram color="red" size={"2rem"} />,
-  <BsTwitter color="#1DA1F2" size={"2rem"} />,
-];
+
 export default function SocialIcons() {
+  const [link, setLink] = useState({});
+  useEffect(() => {
+    GetLink();
+  }, []);
+  async function GetLink() {
+    try {
+      let { data } = await axios.get("http://localhost:8080/social");
+      setLink(data[data.length - 1]);
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
+  const socialIcons = [
+    {
+      link: link?.facebook,
+      icon: <BsFacebook color="#3b5998" size={"2rem"} />,
+    },
+    {
+      link: link?.insta,
+      icon: <GrInstagram color="red" size={"2rem"} />,
+    },
+    {
+      link: link?.linkedIn,
+      icon: <BsLinkedin color="#1DA1F2" size={"2rem"} />,
+    },
+  ];
+
   return (
     <Stack
-    display={{base:"none",md:"none",lg:"flex"}}
+      display={{ base: "none", md: "none", lg: "flex" }}
       h="auto"
       p="16px"
       w="5%"
@@ -19,12 +43,11 @@ export default function SocialIcons() {
       left={"0"}
       top={"30vh"}
     >
-        {
-            socialIcons.map((e,i)=>(
-                <IconButton key={i} colorScheme={'transparent'} icon={e} />
-            ))
-        }
-       
+      {socialIcons.map((e, i) => (
+        <a key={i} href={e?.link} target="_blank">
+          <IconButton  colorScheme={"transparent"} icon={e?.icon} />
+        </a>
+      ))}
     </Stack>
   );
 }
