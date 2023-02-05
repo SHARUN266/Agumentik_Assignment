@@ -3,7 +3,6 @@ import {
   Flex,
   HStack,
   Text,
-  
   IconButton,
   Button,
   useDisclosure,
@@ -13,25 +12,24 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import AdminLogin from "./AdminLogin";
 
 const Links = ["Home", "How it works", "Features", "Contact Us"];
 
 const NavLink = ({ children }) => (
-  <Link
-   
-   to={"/about"}
-  >
-    <Text px={2}
-    py={1}
-    fontSize={18}
-    fontWeight={400}
-    transition={"500ms"}
-    _hover={{
-      color: "blueColorCode",
-    }}>
-  {children}
+  <Link to={"/about"}>
+    <Text
+      px={2}
+      py={1}
+      fontSize={18}
+      fontWeight={400}
+      transition={"500ms"}
+      _hover={{
+        color: "blueColorCode",
+      }}
+    >
+      {children}
     </Text>
-  
   </Link>
 );
 const style = {
@@ -44,7 +42,21 @@ const style = {
 
 export default function Navbar() {
   const [flag, setFlag] = useState(false);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isOpen1, setIsOpen1] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+
+  const { onOpen: onOpen1, onClose: onClose1 } = useDisclosure({
+    isOpen: isOpen1,
+    onClose: () => setIsOpen1(false),
+    onOpen: () => setIsOpen1(true),
+  });
+
+  const { onOpen: onOpen2, onClose: onClose2 } = useDisclosure({
+    isOpen: isOpen2,
+    onClose: () => setIsOpen2(false),
+    onOpen: () => setIsOpen2(true),
+  });
+
   window.addEventListener("scroll", () => {
     let y = window.scrollY;
     if (y > 150) {
@@ -57,15 +69,16 @@ export default function Navbar() {
 
   return (
     <Box
-    zIndex={100}
+      zIndex={100}
       style={flag ? style : { bg: "#111" }}
       transition={"1000ms"}
       pos={"sticky"}
       top={"0"}
     >
+      <AdminLogin isOpen={isOpen1} onOpen={onOpen1} onClose={onClose1} />
       <Box
         w={["95%", "100%", "80%"]}
-        h={["5vh", "10vh", "15vh"]}
+        h={["10vh", "10vh", "15vh"]}
         m="auto"
         px={4}
       >
@@ -73,20 +86,19 @@ export default function Navbar() {
           <IconButton
             size={"md"}
             colorScheme={"transparent"}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            icon={isOpen2 ? <CloseIcon /> : <HamburgerIcon fontSize={"lg"} />}
             aria-label={"Open Menu"}
             display={{ md: "none" }}
-            onClick={isOpen ? onClose : onOpen}
+            onClick={isOpen2 ? onClose2 : onOpen2}
           />
           <HStack spacing={8} alignItems={"center"}>
             <Link to="/">
-            <Flex alignItems={"center"}>
-              {" "}
-              <Heading fontSize={25}>Galactic</Heading>{" "}
-              <Text fontSize={25}>Jobs</Text>{" "}
-            </Flex>
+              <Flex alignItems={"center"}>
+                {" "}
+                <Heading fontSize={25}>Galactic</Heading>{" "}
+                <Text fontSize={25}>Jobs</Text>{" "}
+              </Flex>
             </Link>
-            
           </HStack>
           <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
             {Links.map((link) => (
@@ -103,13 +115,14 @@ export default function Navbar() {
               size={["sm", "md", "lg"]}
               borderRadius={"50px"}
               shadow={"md"}
+              onClick={onOpen1}
             >
-            Admin Login
+              Admin Login
             </Button>
           </Flex>
         </Flex>
 
-        {isOpen ? (
+        {isOpen2 ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
               {Links.map((link) => (

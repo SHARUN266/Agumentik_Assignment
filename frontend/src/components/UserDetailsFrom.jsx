@@ -11,10 +11,12 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 export default function UserDetailsFrom({ onOpen, onClose, isOpen }) {
   const form = useRef();
+  const toast = useToast();
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -34,7 +36,15 @@ export default function UserDetailsFrom({ onOpen, onClose, isOpen }) {
           console.log(error.text);
         }
       );
-    e.target.reset();
+
+    toast({
+      title: "Email sent to your email address successfully!",
+
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
+    onClose();
   };
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -69,14 +79,6 @@ export default function UserDetailsFrom({ onOpen, onClose, isOpen }) {
                   placeholder="Enter your contact number"
                 />
               </FormControl>
-              {/* <FormControl mt={4}>
-                <FormLabel>Email</FormLabel>
-                <Input
-                  name={"from_email"}
-                  type={"email"}
-                  placeholder="Enter your email"
-                />
-              </FormControl> */}
 
               <ModalFooter>
                 <Input
