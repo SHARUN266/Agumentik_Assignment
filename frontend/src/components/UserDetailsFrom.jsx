@@ -21,10 +21,10 @@ export default function UserDetailsFrom({ onOpen, onClose, isOpen }) {
 
     emailjs
       .sendForm(
-        "service_k36x048",
-        "template_rt6mj0c",
+        import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
         form.current,
-        "U0VwhSUHjuBe7oxXc"
+        import.meta.env.VITE_PUBLIC_KEY
       )
       .then(
         (result) => {
