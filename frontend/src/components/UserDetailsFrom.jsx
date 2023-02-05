@@ -55,7 +55,7 @@ export default function UserDetailsFrom({ onOpen, onClose, isOpen }) {
         finalFocusRef={finalRef}
         isOpen={isOpen}
         onClose={onClose}
-        isCentered
+        
       >
         <ModalOverlay />
         <ModalContent>
@@ -66,6 +66,7 @@ export default function UserDetailsFrom({ onOpen, onClose, isOpen }) {
               <FormControl>
                 <FormLabel>Your name</FormLabel>
                 <Input
+                  autocomplete="off"
                   name="user_name"
                   ref={initialRef}
                   placeholder="Enter your name"

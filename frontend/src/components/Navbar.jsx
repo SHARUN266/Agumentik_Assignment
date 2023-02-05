@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import AdminLogin from "./AdminLogin";
 
 const Links = ["Home", "How it works", "Features", "Contact Us"];
-
+// NavLink component returns a link to the '/about' path with a Text component displaying the children prop
 const NavLink = ({ children }) => (
   <Link to={"/about"}>
     <Text
@@ -32,6 +32,7 @@ const NavLink = ({ children }) => (
     </Text>
   </Link>
 );
+// style object contains the styles for the background of the navigation bar
 const style = {
   backgroundColor: "#ffffff11",
 
@@ -41,22 +42,27 @@ const style = {
 };
 
 export default function Navbar() {
+  // flag state to track if the navigation bar should have the styles defined in the `style` object
   const [flag, setFlag] = useState(false);
+  // isOpen1 and isOpen2 states to track if the AdminLogin and navigation menu modals are open
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
 
+  // onOpen1 and onClose1 hooks for the AdminLogin modal
   const { onOpen: onOpen1, onClose: onClose1 } = useDisclosure({
     isOpen: isOpen1,
     onClose: () => setIsOpen1(false),
     onOpen: () => setIsOpen1(true),
   });
 
+  // onOpen2 and onClose2 hooks for the navigation menu modal
   const { onOpen: onOpen2, onClose: onClose2 } = useDisclosure({
     isOpen: isOpen2,
     onClose: () => setIsOpen2(false),
     onOpen: () => setIsOpen2(true),
   });
 
+  // event listener for the window's scroll event to set the flag state
   window.addEventListener("scroll", () => {
     let y = window.scrollY;
     if (y > 150) {
@@ -66,6 +72,7 @@ export default function Navbar() {
       setFlag(false);
     }
   });
+
 
   return (
     <Box

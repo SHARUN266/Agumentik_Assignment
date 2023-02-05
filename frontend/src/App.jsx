@@ -7,12 +7,13 @@ import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import About from "./pages/About";
 import UserDetailsFrom from "./components/UserDetailsFrom";
+import Admin from "./pages/Admin";
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     setTimeout(() => {
       onOpen()
-    }, 10000);
+    }, 30000);
   }, []);
 
   return (
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/admin" element={<Admin/>}/>
       </Routes>
 
       <SocialIcons />

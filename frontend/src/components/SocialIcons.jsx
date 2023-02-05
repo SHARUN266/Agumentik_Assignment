@@ -20,8 +20,8 @@ export default function SocialIcons() {
       top={"30vh"}
     >
         {
-            socialIcons.map((e)=>(
-                <IconButton colorScheme={'transparent'} icon={e} />
+            socialIcons.map((e,i)=>(
+                <IconButton key={i} colorScheme={'transparent'} icon={e} />
             ))
         }
        
