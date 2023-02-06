@@ -70,14 +70,14 @@ export default function UserDetailsFrom({ onOpen, onClose, isOpen }) {
                   placeholder="Enter your contact number"
                 />
               </FormControl>
-              {/* <FormControl mt={4}>
+              <FormControl mt={4}>
                 <FormLabel>Enter your email</FormLabel>
                 <Input
                   name={"user_email"}
                   type={"email"}
                   placeholder="Enter your email"
                 />
-              </FormControl> */}
+              </FormControl>
 
               <ModalFooter>
                 <Input
