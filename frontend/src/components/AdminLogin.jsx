@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { ContextApp } from "../context/ContextProvider";
 export default function AdminLogin({ isOpen, onOpen, onClose }) {
   const {setAuth}=useContext(ContextApp)
+  const [loading,setLoading]=useState(false)
   const toast = useToast();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -30,9 +31,10 @@ export default function AdminLogin({ isOpen, onOpen, onClose }) {
     setText({ ...text, [e.target.name]: e.target.value });
   }
   async function handleSubmit(e) {
-   
+     
     
     if (e.key === "Enter") {
+      setLoading(true)
       try {
         let { data } = await axios.post("https://argumentikassignment.onrender.com/admin", text);
         if (data == "Login successfull!") {
@@ -43,10 +45,13 @@ export default function AdminLogin({ isOpen, onOpen, onClose }) {
             duration: 9000,
             isClosable: true,
           });
+          setLoading(false)
           setAuth(true)
           nav("/admin");
         } else {
+          setLoading(false)
           toast({
+
             title: data,
 
             status: "error",
@@ -56,6 +61,7 @@ export default function AdminLogin({ isOpen, onOpen, onClose }) {
         }
         onClose()
       } catch (e) {
+        setLoading(false)
         toast({
           title: e,
 
@@ -107,6 +113,7 @@ export default function AdminLogin({ isOpen, onOpen, onClose }) {
 
           <ModalFooter>
             <Button
+            isLoading={loading}
               onKeyUp={(e) => handleSubmit(e)}
               type="submit"
               colorScheme="blue"

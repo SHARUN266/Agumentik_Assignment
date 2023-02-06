@@ -20,22 +20,13 @@ export default function UserDetailsFrom({ onOpen, onClose, isOpen }) {
 
   const sendEmail = (e) => {
     e.preventDefault();
-
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_SERVICE_ID,
-        import.meta.env.VITE_TEMPLATE_ID,
-        form.current,
-        import.meta.env.VITE_PUBLIC_KEY
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+   
+    emailjs.sendForm('service_k36x048', 'template_rt6mj0c', form.current, 'uZYAPiWqS6_2cVu_P')
+    .then((result) => {
+        console.log(result.text);
+    }, (error) => {
+        console.log(error.text);
+    });
 
     toast({
       title: "Email sent to your email address successfully!",
@@ -55,7 +46,6 @@ export default function UserDetailsFrom({ onOpen, onClose, isOpen }) {
         finalFocusRef={finalRef}
         isOpen={isOpen}
         onClose={onClose}
-        
       >
         <ModalOverlay />
         <ModalContent>
@@ -66,7 +56,7 @@ export default function UserDetailsFrom({ onOpen, onClose, isOpen }) {
               <FormControl>
                 <FormLabel>Your name</FormLabel>
                 <Input
-                  autocomplete="off"
+                  autoComplete="off"
                   name="user_name"
                   ref={initialRef}
                   placeholder="Enter your name"
@@ -80,6 +70,14 @@ export default function UserDetailsFrom({ onOpen, onClose, isOpen }) {
                   placeholder="Enter your contact number"
                 />
               </FormControl>
+              {/* <FormControl mt={4}>
+                <FormLabel>Enter your email</FormLabel>
+                <Input
+                  name={"user_email"}
+                  type={"email"}
+                  placeholder="Enter your email"
+                />
+              </FormControl> */}
 
               <ModalFooter>
                 <Input
