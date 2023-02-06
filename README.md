@@ -17,3 +17,8 @@
 ## Share details
 
 ![image](https://user-images.githubusercontent.com/101327895/216906184-ee1a0aeb-7774-497c-89bc-fb95b7309eab.png)
+
+
+## Admin Page You can change social media link and jobs types also dynamacally
+
+![image](https://user-images.githubusercontent.com/101327895/216907190-5925c14e-e42e-405d-8f2e-75d7cf649d5d.png)
