@@ -34,7 +34,7 @@ export default function AdminLogin({ isOpen, onOpen, onClose }) {
     
     if (e.key === "Enter") {
       try {
-        let { data } = await axios.post("http://localhost:8080/admin", text);
+        let { data } = await axios.post("https://argumentikassignment.onrender.com/admin", text);
         if (data == "Login successfull!") {
           toast({
             title: data,

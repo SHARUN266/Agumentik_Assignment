@@ -23,7 +23,7 @@ export default function About() {
   },[])
   async function FetchJobType(){
     try{
-      let {data}=await axios.get("http://localhost:8080/job")
+      let {data}=await axios.get("https://argumentikassignment.onrender.com/job")
       setJobType(data)
 
     }catch(e){

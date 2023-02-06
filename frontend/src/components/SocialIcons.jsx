@@ -13,7 +13,7 @@ export default function SocialIcons() {
   }, [flag]);
   async function GetLink() {
     try {
-      let { data } = await axios.get("http://localhost:8080/social");
+      let { data } = await axios.get("https://argumentikassignment.onrender.com/social");
       setLink(data[data.length - 1]);
     } catch (e) {
       console.log(e.message);

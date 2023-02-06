@@ -14,7 +14,7 @@ export default function PostJobTypes() {
   async function handleJobSubmit(e) {
     e.preventDefault();
     try {
-      axios.post("http://localhost:8080/job", job);
+      axios.post("https://argumentikassignment.onrender.com/job", job);
     } catch (e) {
       console.log(e.message);
     }
