@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Heading, Input, Stack } from "@chakra-ui/react";
 
 import { handleSubmit } from "../config/SocialSubmit";
 import { SocialName } from "../config/SocialInput.js";
+import { ContextApp } from "../context/ContextProvider";
 export default function SocialLinks() {
+  const {flag,setFlag}=useContext(ContextApp)
   const [social, setSocial] = useState({
     facebook: "",
     insta: "",
@@ -14,7 +16,7 @@ export default function SocialLinks() {
   }
 
   return (
-    <form onSubmit={(e)=>handleSubmit(e,social)}>
+    <form onSubmit={(e)=>handleSubmit(e,social,flag,setFlag)}>
       <Stack w="30%" m="auto" gap={"10px"}>
         <Heading fontSize={"2xl"}>Change Social icons links</Heading>
        
@@ -22,7 +24,7 @@ export default function SocialLinks() {
         SocialName.map((e,i)=>(
           <Input
           key={i}
-          onChange={(e) => handleLink(e,social)}
+          onChange={(e) => handleLink(e)}
           name={e.name}
           bg={"white"}
           color={"#111"}

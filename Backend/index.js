@@ -4,6 +4,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const SocialLinkSchema = require("./models/Social.Schema");
 const cors = require("cors");
+const JobTypeModel = require("./models/JobType.schema");
 const PORT = process.env.PORT || 8080;
 app.use(express.json());
 app.use(cors());
@@ -29,6 +30,25 @@ app.post("/social", async (req, res) => {
 app.get("/social", async (req, res) => {
   try {
     let links = await SocialLinkSchema.find({});
+    res.status(200).send(links);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+app.post("/job", async (req, res) => {
+  const { title, text } = req.body;
+  try {
+    let job = new JobTypeModel({ title, text });
+    await job.save();
+    res.status(404).send(job);
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+app.get("/job", async (req, res) => {
+  try {
+    let links = await JobTypeModel.find({});
     res.status(200).send(links);
   } catch (e) {
     res.status(500).send(e.message);

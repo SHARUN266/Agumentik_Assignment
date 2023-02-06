@@ -13,9 +13,11 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ContextApp } from "../context/ContextProvider";
 export default function AdminLogin({ isOpen, onOpen, onClose }) {
+  const {setAuth}=useContext(ContextApp)
   const toast = useToast();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -28,6 +30,7 @@ export default function AdminLogin({ isOpen, onOpen, onClose }) {
     setText({ ...text, [e.target.name]: e.target.value });
   }
   async function handleSubmit(e) {
+   
     
     if (e.key === "Enter") {
       try {
@@ -40,6 +43,7 @@ export default function AdminLogin({ isOpen, onOpen, onClose }) {
             duration: 9000,
             isClosable: true,
           });
+          setAuth(true)
           nav("/admin");
         } else {
           toast({

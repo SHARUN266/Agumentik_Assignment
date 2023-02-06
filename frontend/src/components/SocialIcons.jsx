@@ -1,14 +1,16 @@
 import {  IconButton,  Stack } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BsFacebook, BsLinkedin } from "react-icons/bs";
 import { GrInstagram } from "react-icons/gr";
+import { ContextApp } from "../context/ContextProvider";
 
 export default function SocialIcons() {
+  const {flag}=useContext(ContextApp)
   const [link, setLink] = useState({});
   useEffect(() => {
     GetLink();
-  }, []);
+  }, [flag]);
   async function GetLink() {
     try {
       let { data } = await axios.get("http://localhost:8080/social");

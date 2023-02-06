@@ -11,22 +11,31 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-// Replace test data with your own
-const features = Array.apply(null, Array(8)).map(function (x, i) {
-  return {
-    id: i,
-    title: "Lorem ipsum dolor sit amet",
-    text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.",
-  };
-});
+
 
 export default function About() {
+  const [jobType,setJobType]=useState([])
+  useEffect(()=>{
+    FetchJobType()
+  },[])
+  async function FetchJobType(){
+    try{
+      let {data}=await axios.get("http://localhost:8080/job")
+      setJobType(data)
+
+    }catch(e){
+      console.log(e.message)
+    }
+
+  }
   return (
     <Flex alignItems={"center"} justifyContent={"center"} h={"auto"}>
       <Box mt="5%" p={4}>
         <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
-          <Heading fontSize={"3xl"}>This is the headline</Heading>
+          <Heading fontSize={"3xl"}>Find Your Job Category</Heading>
           <Text color={"fontColor"} fontSize={"xl"}>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
@@ -36,8 +45,8 @@ export default function About() {
 
         <Container maxW={"6xl"} mt={10}>
           <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10}>
-            {features.map((feature) => (
-              <HStack key={feature.id} align={"top"}>
+            {jobType?.map((feature) => (
+              <HStack key={feature._id} align={"top"}>
                 <Box color={"green.400"} px={2}>
                   <Icon as={CheckIcon} />
                 </Box>
